@@ -1,5 +1,6 @@
 package org.example.resource;
 
+import io.dropwizard.hibernate.UnitOfWork;
 import org.example.entity.MyBooks;
 import org.example.dao.MyDAOBooks;
 import org.example.entity.MyEntity;
@@ -13,34 +14,30 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class BookResource {
 
-    private final MyDAOBooks dao;
+    private final MyDAOBooks bookDao;
 
     @Inject
-    public BookResource(MyDAOBooks dao) {
-        this.dao = dao;
-    }
-
-    @GET
-    public List<MyEntity> getAll() {
-        return dao.findAll();
+    public BookResource(MyDAOBooks bookDao) {
+        this.bookDao = bookDao;
     }
 
     @GET
     @Path("/{id}")
-    public MyEntity getById(@PathParam("id") Long id) {
-        return dao.findById(id);
+    public MyBooks getBooksByAuthId(@PathParam("id") Integer id) {
+
+        return bookDao.getBookByID(id);
     }
 
+    @GET
+    public MyBooks getAllBooks() {
+
+        return bookDao.getAllBooks();
+    }
     @POST
-    public MyBooks create(MyBooks entity) {
-        return dao.save(entity);
+    public Integer create(MyBooks entity) {
+        return bookDao.save(entity);
     }
 
-    @DELETE
-    @Path("/{id}")
-    public void delete(@PathParam("id") Long id) {
-        final MyEntity entity = dao.findById(id);
-        dao.delete(entity);
-    }
+
 
 }

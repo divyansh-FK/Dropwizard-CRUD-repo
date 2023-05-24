@@ -19,11 +19,6 @@ public class MyResource {
     }
 
     @GET
-    public String getAll() {
-        return dao.findAll();
-    }
-
-    @GET
     @Path("/{id}")
     public MyEntity getById(@PathParam("id") Long id) {
         return dao.findById(id);

@@ -16,21 +16,17 @@ import javax.persistence.*;
 public class MyBooks {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "BookID")
+    @Column(name = "Bookid")
     private Long BookId;
 
     @Column(name = "BookName")
     private String bookName;
 
-    @Column(name = "name")
-    private String name;
+
 
     @Column(name = "BookDescription")
     private String BookDescription;
 
-    @ToString.Exclude
-   @ManyToOne
-   @JoinColumn(name="ID")
-    private MyEntity entity;
+
 
 }

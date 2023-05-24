@@ -18,16 +18,9 @@ public class MyDAO extends AbstractDAO<MyEntity> {
         super(sessionFactory);
     }
 
-    public String findAll() {
-        final CriteriaBuilder builder = currentSession().getCriteriaBuilder();
-        final CriteriaQuery<MyEntity> criteria = builder.createQuery(MyEntity.class);
-        final Root<MyEntity> root = criteria.from(MyEntity.class);
-        criteria.select(root);
-        return "list(criteria)";
-    }
 
     public MyEntity findById(Long id) {
-        return get(id);
+        return query("select name from MyEntity where id=" + id).getFirstResult();
     }
 
     public MyEntity save(MyEntity entity) {
