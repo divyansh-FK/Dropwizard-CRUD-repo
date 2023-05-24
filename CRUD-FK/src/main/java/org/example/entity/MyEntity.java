@@ -1,5 +1,6 @@
 package org.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,15 +19,16 @@ public class MyEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "eid")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "ename")
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "edescription")
     private String description;
 
-    @OneToMany(mappedBy = "entity")
-    private List<MyBooks> books = new ArrayList<>();
+    @OneToMany
+    @JoinColumn(name = "my_entity_id")
+    private List<MyBooks> books;
 }
